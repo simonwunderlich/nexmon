@@ -764,6 +764,8 @@ struct brcmf_if *brcmf_add_if(struct brcmf_pub *drvr, s32 bsscfgidx, s32 ifidx,
 			return ERR_PTR(-ENOMEM);
 
 		ndev->needs_free_netdev = true;
+		ndev->min_mtu = 256;
+		ndev->max_mtu = 2304;
 		ifp = netdev_priv(ndev);
 		ifp->ndev = ndev;
 		/* store mapping ifidx to bsscfgidx */
