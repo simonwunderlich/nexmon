@@ -66,13 +66,15 @@ wl_monitor_radiotap(struct wl_info *wl, struct wl_rxsts *sts, struct sk_buff *p)
           (1<<IEEE80211_RADIOTAP_TSFT)
         | (1<<IEEE80211_RADIOTAP_FLAGS)
         | (1<<IEEE80211_RADIOTAP_CHANNEL)
-        | (1<<IEEE80211_RADIOTAP_DBM_ANTSIGNAL);
+        | (1<<IEEE80211_RADIOTAP_DBM_ANTSIGNAL)
+	| (1<<IEEE80211_RADIOTAP_RATE);
     frame->tsf.tsf_l = tsf.tsf_l;
     frame->tsf.tsf_h = tsf.tsf_h;
     frame->flags = IEEE80211_RADIOTAP_F_FCS;
     frame->chan_freq = wlc_phy_channel2freq(CHSPEC_CHANNEL(sts->chanspec));
     frame->chan_flags = 0;
     frame->dbm_antsignal = sts->rssi;
+    frame->data_rate = sts->datarate;
 
 	memcpy(p_new->data + sizeof(struct nexmon_radiotap_header), p->data + 6, p->len - 6);
 
